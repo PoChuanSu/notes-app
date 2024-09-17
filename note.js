@@ -9,11 +9,14 @@ const addNotes = (title, body) => {
     const notes = loadNotes();
     const duplicateNotes = notes.filter((note) => note.title === title)
 
+    console.log(duplicateNotes)
+
     if (duplicateNotes.length === 0) {
         notes.push({
         title:title,
         body:body
         })
+
         saveNotes(notes)
         console.log(chalk.green('New note added!'))
 
@@ -32,6 +35,15 @@ const removeNotes = (title) => {
     } else {
         console.log(chalk.red('Could not find the note!'))
     }
+}
+
+const listNotes = () => {
+    const notes = loadNotes();
+    console.log(chalk.blue('Your notes: '));
+    notes.forEach((note) => {
+        console.log(note.title);
+        
+    });
 }
 
 const loadNotes = () => {
@@ -54,5 +66,6 @@ const saveNotes = (notes) => {
 module.exports = {
     getNotes: getNotes,
     addNotes: addNotes,
-    removeNotes: removeNotes
+    removeNotes: removeNotes,
+    listNotes: listNotes
 }
